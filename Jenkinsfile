@@ -4,7 +4,7 @@ pipeline {
         pollSCM '30 17 * * *'
     }
     stages {
-    p    stage('pull from vcs') {
+        stage('pull from vcs') {
          steps {
             git url: 'https://github.com/Qtalha/shopizer.git',
             branch: 'release' 
