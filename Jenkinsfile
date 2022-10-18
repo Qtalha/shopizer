@@ -15,5 +15,11 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage("merge") {
+            steps {
+                sh 'git checkout release'
+                sh 'git merge --no-ff develop'
+            }
+        }
     }
 }
