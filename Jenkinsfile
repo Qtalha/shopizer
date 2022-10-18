@@ -7,7 +7,7 @@ pipeline {
         stage('pull from vcs') {
          steps {
             git url: 'https://github.com/Qtalha/shopizer.git',
-            branch: 'release' 
+            branch: 'master' 
            }
         }
         stage('run') {
@@ -16,8 +16,8 @@ pipeline {
                 sh 'git config --global user.name "Qtalha"'
         stage("merge") {
             steps {
-                sh 'git checkout release'
-                sh 'git merge --no-ff origin/develop'
+                sh 'git checkout master'
+                sh 'git merge --no-ff origin/conflict'
             }
         }
         stage("build") {
