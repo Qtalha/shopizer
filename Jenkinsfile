@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'OPENJDK-11'}
     triggers {
-        pollSCM '30 17 * * *'
+        pollSCM ('30 17 * * *')
     }
     stages {
         stage('pull from vcs') {
@@ -10,15 +10,19 @@ pipeline {
             branch: 'release' 
            }
         }
-        stage("build") {
+        stage('run') {
             steps {
-                sh 'mvn package'
-            }
-        }
+                sh 'git config --global user.email "quazitalhazuhair84@gamail.com"'
+                sh 'git config --global user.name "Qtalha"'
         stage("merge") {
             steps {
                 sh 'git checkout release'
                 sh 'git merge --no-ff origin/develop'
+            }
+        }
+        stage("build") {
+            steps {
+                sh 'mvn package'
             }
         }
     }
