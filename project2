@@ -16,6 +16,12 @@ pipeline {
                 sh 'git merge --no-ff origin/develop1'
             }
         }
+        stage('merge2') {
+            steps {
+                sh 'git checkout master'
+                sh 'git merge --no-ff origin/relase2'
+            }
+        }
         stage('build') {
             steps {
                 sh 'mvn package'
