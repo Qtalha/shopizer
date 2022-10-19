@@ -14,6 +14,8 @@ pipeline {
             steps {
                 sh 'git config --global user.email "quazitalhazuhair84@gamail.com"'
                 sh 'git config --global user.name "Qtalha"'
+            }
+        }
         stage("merge") {
             steps {
                 sh 'git checkout master'
@@ -27,3 +29,4 @@ pipeline {
         }
     }
 }
+
