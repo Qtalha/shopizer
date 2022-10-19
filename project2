@@ -7,7 +7,7 @@ pipeline {
         stage('clone') {
             steps {
               git url:'https://github.com/Qtalha/shopizer.git'
-              branch:'master'
+              branch:'relase2'
             }
         }
         stage('build') {
