@@ -1,0 +1,19 @@
+pipeline {
+    agent {label 'OPENJDK-11'}
+    triggers {
+        cron('30 17 * * *')
+    }  
+    stages {
+        stage('clone') {
+            steps {
+              git url:'https://github.com/Qtalha/shopizer.git'
+              branch:'master'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+}
