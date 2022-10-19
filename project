@@ -1,0 +1,59 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@Qtalha 
+Qtalha
+/
+shopizer
+Public
+forked from shopizer-ecommerce/shopizer
+Code
+Pull requests
+Actions
+Projects
+Security
+Insights
+Settings
+shopizer/Jenkinsfile
+@Qtalha
+Qtalha something
+Latest commit 59746e3 19 hours ago
+ History
+ 1 contributor
+25 lines (25 sloc)  548 Bytes
+
+pipeline {
+    agent {label 'OPENJDK-11'}
+    triggers {
+        pollSCM '30 17 * * *'
+    }
+    stages {
+        stage('pull from vcs') {
+         steps {
+            git url: 'https://github.com/Qtalha/shopizer.git',
+            branch: 'release' 
+           }
+        }
+        stage("build") {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage("merge") {
+            steps {
+                sh 'git checkout release'
+                sh 'git merge --no-ff origin/develop'
+            }
+        }
+        stage('merge') {
+            steps {
+                sh 'git checkout master'
+                sh 'git merge --no-ff origin/release'
+            }
+        }
+    }
+}
