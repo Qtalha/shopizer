@@ -20,3 +20,31 @@ pipeline {
         }
     }
 }
+=======
+pipeline {
+    agent {label 'OPENJDK-11' }
+    triggers {
+        pollSCM '* * * * *'
+    }
+    stages{
+        stage ('pull from vcs'){
+              steps {
+                git url :'https://github.com/Qtalha/shopizer.git'
+                branch : 'task05' 
+              }
+        }
+        stage ('build') {
+            steps {
+                sh 'mvn package'
+            }
+            post {
+        always {
+            archiveArtifacts artifacts: '**/archive"/**/*.jar', fingerprint: true
+            junit '**/archive"/**/*.xml'
+			}
+	}
+
+        }
+    }
+}
+>>>>>>> 64b5d1c1673a69c5ec522b87154d3260d6fbf889
