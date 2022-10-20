@@ -1,0 +1,22 @@
+pipeline {
+    agent {label 'OPENJDK-11' }
+    stages{
+        stage ('pull from vcs'){
+              steps {
+                git url :'https://github.com/Qtalha/shopizer.git',
+                branch : 'task05' 
+              }
+        }
+        stage ('build') {
+            steps {
+                sh 'mvn package'
+            }
+            post {
+        always {
+            archiveArtifacts artifacts: '**/*.jar'
+			}
+	}
+
+        }
+    }
+}
